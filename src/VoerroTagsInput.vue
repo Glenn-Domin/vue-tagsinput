@@ -19,7 +19,7 @@
             <button class="btn btn-primary ml-2" @click="tagFromInput">Add</button>
         </div>
         <div :class="wrapperClass + ' tags-input'">
-            <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
+            <span class="badge badge-primary badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
                 :key="index" @click.prevent="removeTag(index)"
             >
