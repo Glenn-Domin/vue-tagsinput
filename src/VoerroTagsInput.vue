@@ -1,21 +1,23 @@
 <template>
     <div class="tags-input-root flex-grow-1">
-
-        <input type="text"
-            ref="taginput"
-            :placeholder="placeholder"
-            v-model="input"
-            @keydown.enter.prevent="tagFromInput"
-            @keydown.8="removeLastTag"
-            @keydown.down="nextSearchResult"
-            @keydown.up="prevSearchResult"
-            @keydown="onKeyDown"
-            @keyup.esc="ignoreSearchResults"
-            @keyup="searchTag"
-            @focus="onFocus"
-            @blur="hideTypeahead"
-            @value="tags"
-            class="form-control w-100">
+        <div class="tags-input-root flex-grow-1">
+            <input type="text"
+                ref="taginput"
+                :placeholder="placeholder"
+                v-model="input"
+                @keydown.enter.prevent="tagFromInput"
+                @keydown.8="removeLastTag"
+                @keydown.down="nextSearchResult"
+                @keydown.up="prevSearchResult"
+                @keydown="onKeyDown"
+                @keyup.esc="ignoreSearchResults"
+                @keyup="searchTag"
+                @focus="onFocus"
+                @blur="hideTypeahead"
+                @value="tags"
+                class="form-control w-100">
+            <button class="btn btn-primary ml-2" @click="tagFromInput">Add</button>
+        </div>
         <div :class="wrapperClass + ' tags-input'">
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
