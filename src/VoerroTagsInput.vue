@@ -1,5 +1,5 @@
 <template>
-    <div class="tags-input-root">
+    <div class="tags-input-root flex-grow-1">
 
         <input type="text"
             ref="taginput"
@@ -15,7 +15,7 @@
             @focus="onFocus"
             @blur="hideTypeahead"
             @value="tags"
-            class="form-control">
+            class="form-control w-100">
         <div :class="wrapperClass + ' tags-input'">
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
