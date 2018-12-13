@@ -1,29 +1,30 @@
 <template>
     <div class="tags-input-root">
+
+        <input type="text"
+            ref="taginput"
+            :placeholder="placeholder"
+            v-model="input"
+            @keydown.enter.prevent="tagFromInput"
+            @keydown.8="removeLastTag"
+            @keydown.down="nextSearchResult"
+            @keydown.up="prevSearchResult"
+            @keydown="onKeyDown"
+            @keyup.esc="ignoreSearchResults"
+            @keyup="searchTag"
+            @focus="onFocus"
+            @blur="hideTypeahead"
+            @value="tags"
+            class="form-control">
         <div :class="wrapperClass + ' tags-input'">
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
-                :key="index"
+                :key="index" @click.prevent="removeTag(index)"
             >
+                <i href="#" class="tags-input-remove"></i>
                 <span v-html="badge"></span>
 
-                <i href="#" class="tags-input-remove" @click.prevent="removeTag(index)"></i>
             </span>
-
-            <input type="text"
-                ref="taginput"
-                :placeholder="placeholder"
-                v-model="input"
-                @keydown.enter.prevent="tagFromInput"
-                @keydown.8="removeLastTag"
-                @keydown.down="nextSearchResult"
-                @keydown.up="prevSearchResult"
-                @keydown="onKeyDown"
-                @keyup.esc="ignoreSearchResults"
-                @keyup="searchTag"
-                @focus="onFocus"
-                @blur="hideTypeahead"
-                @value="tags">
 
             <input type="hidden" v-if="elementId"
                 :name="elementId"
