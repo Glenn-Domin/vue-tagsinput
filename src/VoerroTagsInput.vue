@@ -16,7 +16,7 @@
                 @blur="hideTypeahead"
                 @value="tags"
                 class="form-control w-100">
-            <button class="btn btn-primary ml-2" @click="tagFromInput">Add</button>
+            <button class="btn btn-primary ml-2" @click.prevent="tagFromInput">Add</button>
         </div>
         <small v-if="instruction">{{instruction}}</small>
         <div :class="wrapperClass + ' tags-input'">
