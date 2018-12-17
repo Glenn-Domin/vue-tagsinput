@@ -18,6 +18,7 @@
                 class="form-control w-100">
             <button class="btn btn-primary ml-2" @click="tagFromInput">Add</button>
         </div>
+        <small v-if="instruction">You can also add multiple owners using comma separated values</small>
         <div :class="wrapperClass + ' tags-input'">
             <span class="badge badge-primary badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
@@ -68,6 +69,8 @@
 export default {
     props: {
         elementId: String,
+
+        instruction: String,
 
         existingTags: {
             type: Object,
