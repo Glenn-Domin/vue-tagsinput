@@ -5,6 +5,7 @@
                 ref="taginput"
                 :placeholder="placeholder"
                 v-model="input"
+                :required="required"
                 @keydown.enter.prevent="tagFromInput"
                 @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
@@ -68,6 +69,11 @@
 export default {
     props: {
         elementId: String,
+
+        required: {
+            type: Boolean,
+            default: false
+        },
 
         existingTags: {
             type: Object,
