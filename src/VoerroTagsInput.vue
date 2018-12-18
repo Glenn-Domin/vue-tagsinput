@@ -1,6 +1,6 @@
 <template>
     <div class="tags-input-root flex-grow-1">
-        <div class="d-flex">
+        <div class="d-flex position-relative">
             <input type="text"
                 ref="taginput"
                 :placeholder="placeholder"
@@ -17,6 +17,34 @@
                 @value="tags"
                 class="form-control w-100">
             <button class="btn btn-primary ml-2" @click.prevent="tagFromInput">Add</button>
+
+            <!-- Typeahead/Autocomplete -->
+            <div v-show="searchResults.length">
+                <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
+                    <span v-for="(tag, index) in searchResults"
+                        :key="index"
+                        v-text="tag.text"
+                        @mouseover="searchSelection = index"
+                        @mousedown.prevent="tagFromSearchOnClick(tag)"
+                        class="tags-input-badge"
+                        v-bind:class="{
+                            'tags-input-typeahead-item-default': index != searchSelection,
+                            'tags-input-typeahead-item-highlighted-default': index == searchSelection
+                        }"></span>
+                </p>
+
+                <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
+                    <li v-for="(tag, index) in searchResults"
+                    :key="index"
+                    v-text="tag.text"
+                    @mouseover="searchSelection = index"
+                    @mousedown.prevent="tagFromSearchOnClick(tag)"
+                    v-bind:class="{
+                        'tags-input-typeahead-item-default': index != searchSelection,
+                        'tags-input-typeahead-item-highlighted-default': index == searchSelection
+                    }"></li>
+                </ul>
+            </div>
         </div>
         <small v-if="instruction">{{instruction}}</small>
         <div :class="wrapperClass + ' tags-input'">
@@ -33,34 +61,6 @@
                 :name="elementId"
                 :id="elementId"
                 v-model="hiddenInput">
-        </div>
-
-        <!-- Typeahead/Autocomplete -->
-        <div v-show="searchResults.length">
-            <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
-                <span v-for="(tag, index) in searchResults"
-                    :key="index"
-                    v-text="tag.text"
-                    @mouseover="searchSelection = index"
-                    @mousedown.prevent="tagFromSearchOnClick(tag)"
-                    class="tags-input-badge"
-                    v-bind:class="{
-                        'tags-input-typeahead-item-default': index != searchSelection,
-                        'tags-input-typeahead-item-highlighted-default': index == searchSelection
-                    }"></span>
-            </p>
-
-            <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
-                <li v-for="(tag, index) in searchResults"
-                :key="index"
-                v-text="tag.text"
-                @mouseover="searchSelection = index"
-                @mousedown.prevent="tagFromSearchOnClick(tag)"
-                v-bind:class="{
-                    'tags-input-typeahead-item-default': index != searchSelection,
-                    'tags-input-typeahead-item-highlighted-default': index == searchSelection
-                }"></li>
-            </ul>
         </div>
     </div>
 </template>
