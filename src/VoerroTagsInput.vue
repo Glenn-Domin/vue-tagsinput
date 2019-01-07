@@ -15,7 +15,7 @@
                 @focus="onFocus"
                 @blur="hideTypeahead"
                 @value="tags"
-                class="form-control w-100">
+                :class="['form-control w-100', {'is-invalid': tags.length === 0}]">
 
             <!-- Typeahead/Autocomplete -->
             <div v-show="searchResults.length">
