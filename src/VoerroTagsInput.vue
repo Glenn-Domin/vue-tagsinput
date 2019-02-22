@@ -144,6 +144,11 @@ export default {
             type: String,
             default: 'tags-input-wrapper-default'
         },
+
+        clearSearchResults: {
+            type: Boolean,
+            default: false
+        },
     },
 
     data() {
@@ -179,6 +184,12 @@ export default {
 
         value() {
             this.tagsFromValue();
+        },
+
+        clearSearchResults() {
+            if (this.clearSearchResults) {
+                this.searchResults = []
+            }
         }
     },
 
